@@ -10,8 +10,8 @@ const TODO_ITEMS = [
   'book a doctors appointment'
 ] as const;
 
-test.describe('New Todo', () => {
-  test('should allow me to add todo items', async ({ page }) => {
+test.describe('Login page', () => {
+  test('should open login page and verify it opened', async ({ page }) => {
     // create a new todo locator
     const newTodo = page.getByPlaceholder('What needs to be done?');
 
