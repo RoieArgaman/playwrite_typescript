@@ -13,7 +13,6 @@ class ForgotYourPasswordPage extends BasePage {
         await this.click(this.resetPasswordButton);
     }
 
-    // Optionally, override methods from BasePage if needed
     async open(): Promise<void> {
         await super.open(this.url); // Call the base class open method
     }
