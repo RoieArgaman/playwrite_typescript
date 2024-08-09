@@ -16,4 +16,12 @@ testSetup.describe('Login page', () => {
     await webFlows.loginFlows.forgotYourPasswordPage.open()
     expect(await webFlows.loginFlows.forgotYourPasswordPage.is_in_page()).toBeTruthy()
   });
+
+  testSetup('should register flow', async ({webFlows}) => {
+    await webFlows.loginFlows.loginPage.open()
+    await webFlows.loginFlows.loginPage.clickGetStartedButton()
+    expect(await webFlows.wizardFlows.registerPage.is_in_page()).toBeTruthy()
+    await webFlows.wizardFlows.registerPage.clickEmailAndPasswordButton()
+    expect(await webFlows.wizardFlows.registerPage.is_in_page()).toBeTruthy()
+  });
 });
