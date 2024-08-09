@@ -1,14 +1,13 @@
 import { BasePage } from '../../framework/page';
 
 class LoginPage extends BasePage {
-    private get usernameInput(): string { return '#username'; }
-    private get passwordInput(): string { return '#password'; }
-    private get loginButton(): string { return '#loginButton'; }
+    private get emailInput(): string { return '[data-vfeature*="email"]'; }
+    private get passwordInput(): string { return '[data-vfeature*="password"]'; }
+    private get loginButton(): string { return '.auto_login_form_button'; }
+    public get url(): string { return '/login'; }
 
-    private get url(): string { return '/login'; }
-
-    async enterUsername(username: string): Promise<void> {
-        await this.fill(this.usernameInput, username);
+    async enterEmail(username: string): Promise<void> {
+        await this.fill(this.emailInput, username);
     }
 
     async enterPassword(password: string): Promise<void> {
@@ -20,7 +19,7 @@ class LoginPage extends BasePage {
     }
 
     async login(username: string, password: string): Promise<void> {
-        await this.enterUsername(username);
+        await this.enterEmail(username);
         await this.enterPassword(password);
         await this.clickLoginButton();
     }

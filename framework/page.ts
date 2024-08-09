@@ -3,7 +3,7 @@ import {GlobalPaths} from "./global_variables";
 
 class BasePage {
     protected page: Page;
-    private get url(): string { return ''; }
+    public get url(): string { return '/login'; }
     constructor(page: Page) {
         this.page = page;
     }
