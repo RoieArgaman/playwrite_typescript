@@ -1,9 +1,9 @@
 import { BasePage } from '../../framework/page';
 
 class ForgotYourPasswordPage extends BasePage {
-    private get emailInput(): string { return '.auto_forgot-password_form_text-field'; }
-    private get resetPasswordButton(): string { return '.auto_forgot-password_form_button'; }
-    public get url(): string { return '/resetpassword'; }
+    private get emailInput(): string { return '[data-testid="input-email"]'; }
+    private get resetPasswordButton(): string { return '[data-testid="button-auth.requestResetPassword.resetPasswordButton"]'; }
+    public get url(): string { return '/request-reset-password'; }
 
     async enterEmail(username: string): Promise<void> {
         await this.fill(this.emailInput, username);

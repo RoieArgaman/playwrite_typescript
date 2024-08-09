@@ -1,10 +1,11 @@
 import { BasePage } from '../../framework/page';
 
 class LoginPage extends BasePage {
-    private get emailInput(): string { return '[data-vfeature*="email"]'; }
-    private get passwordInput(): string { return '[data-vfeature*="password"]'; }
-    private get loginButton(): string { return '.auto_login_form_button'; }
-    private get forgotYourPasswordButton(): string { return '.auto_login_forgot_your_password_link'; }
+    private get emailInput(): string { return '[data-testid="input-email"]'; }
+    private get passwordInput(): string { return '[data-testid="input-password"]'; }
+    private get loginButton(): string { return '[data-testid="button-auth.signIn.buttonLabel"]'; }
+    private get forgotYourPasswordButton(): string { return '[data-testid="link-auth.login.forgotPassword"]'; }
+    private get getStartedButton(): string { return '[data-testid="link-Get started"]'; }
     public get url(): string { return '/login'; }
 
     async enterEmail(username: string): Promise<void> {
@@ -17,6 +18,10 @@ class LoginPage extends BasePage {
 
     async clickLoginButton(): Promise<void> {
         await this.click(this.loginButton);
+    }
+
+    async clickGetStartedButton(): Promise<void> {
+        await this.click(this.getStartedButton);
     }
 
     async clickForgotYourPasswordButton(): Promise<void> {
