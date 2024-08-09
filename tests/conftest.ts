@@ -1,4 +1,3 @@
-import { BrowserManager } from '../framework/browser';
 import { WebFlows } from '../pages/web_flows';
 import { test as base } from '@playwright/test';
 
