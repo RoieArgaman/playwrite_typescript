@@ -13,9 +13,6 @@ class LoginFlows {
     }
 }
 
-export { LoginFlows };
-
-
 class WebFlows {
     public loginFlows: LoginFlows;
     private context: BrowserContext;
