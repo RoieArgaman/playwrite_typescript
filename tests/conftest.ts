@@ -1,19 +1,19 @@
 import { BrowserManager } from '../framework/browser';
-import { PageManager } from '../pages/page_manager';
+import { WebFlows } from '../pages/web_flows';
 import { test as base } from '@playwright/test';
 
 const testSetup = base.extend<{
-    pageManager: PageManager;
+    webFlows: WebFlows;
 }>({
-    pageManager: async ({}, use) => {
-        // Initialize PageManager
-        const pageManager = await PageManager.create();
+    webFlows: async ({}, use) => {
+        // Initialize webFlows
+        const webFlows = await WebFlows.create();
 
-        // Provide PageManager to the test
-        await use(pageManager);
+        // Provide webFlows to the test
+        await use(webFlows);
 
         // Cleanup after the test
-        await PageManager.close();
+        await webFlows.close();
     },
 });
 
