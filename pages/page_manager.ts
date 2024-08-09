@@ -1,14 +1,28 @@
 import { Page } from 'playwright';
 import { LoginPage } from './login/login_page';
+import {ForgotYourPasswordPage} from "./login/forgot_your_password_page";
 import { BrowserManager } from '../framework/browser';
 
-class PageManager {
+class LoginFlows {
     public loginPage: LoginPage;
+    public forgotYourPasswordPage: ForgotYourPasswordPage;
+
+    constructor(page: Page) {
+        this.loginPage = new LoginPage(page);
+        this.forgotYourPasswordPage = new ForgotYourPasswordPage(page);
+    }
+}
+
+export { LoginFlows };
+
+
+class PageManager {
+    public loginFlows: LoginFlows;
     private static browserManager: BrowserManager;
     private static page: Page;
 
     private constructor(page: Page) {
-        this.loginPage = new LoginPage(page);
+        this.loginFlows = new LoginFlows(page);
     }
 
     public static async create(): Promise<PageManager> {

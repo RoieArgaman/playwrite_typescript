@@ -4,6 +4,7 @@ class LoginPage extends BasePage {
     private get emailInput(): string { return '[data-vfeature*="email"]'; }
     private get passwordInput(): string { return '[data-vfeature*="password"]'; }
     private get loginButton(): string { return '.auto_login_form_button'; }
+    private get forgotYourPasswordButton(): string { return '.auto_login_forgot_your_password_link'; }
     public get url(): string { return '/login'; }
 
     async enterEmail(username: string): Promise<void> {
@@ -16,6 +17,10 @@ class LoginPage extends BasePage {
 
     async clickLoginButton(): Promise<void> {
         await this.click(this.loginButton);
+    }
+
+    async clickForgotYourPasswordButton(): Promise<void> {
+        await this.click(this.forgotYourPasswordButton);
     }
 
     async login(username: string, password: string): Promise<void> {
