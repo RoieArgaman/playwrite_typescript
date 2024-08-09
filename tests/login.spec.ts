@@ -1,5 +1,4 @@
-import {expect} from '@playwright/test';
-import { testSetup } from './conftest';
+import { testSetup , expect} from './conftest';
 
 testSetup.describe('Login page', () => {
   testSetup('should open login page and verify it opened', async ({webFlows}) => {
