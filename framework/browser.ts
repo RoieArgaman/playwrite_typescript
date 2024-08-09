@@ -1,38 +1,39 @@
-import { chromium, Browser, Page, BrowserType } from 'playwright';
+import { chromium, Browser, BrowserContext, Page } from 'playwright';
 
-export class BrowserWrapper {
+class BrowserManager {
+    private static instance: BrowserManager;
     private browser: Browser;
-    private browserType: BrowserType<Browser>;
+    private context: BrowserContext;
+    private page: Page;
 
-    constructor(browserType: BrowserType<Browser>) {
-        this.browserType = browserType;
-    }
+    private constructor() {}
 
-    // Launch the browser
-    async launch(options?: { headless?: boolean; args?: string[] }): Promise<void> {
-        this.browser = await this.browserType.launch(options);
-    }
-
-    // Create a new page
-    async newPage(): Promise<Page> {
-        if (!this.browser) {
-            throw new Error('Browser is not launched.');
+    public static async getInstance(): Promise<BrowserManager> {
+        if (!BrowserManager.instance) {
+            BrowserManager.instance = new BrowserManager();
+            await BrowserManager.instance.init();
         }
-        return await this.browser.newPage();
+        return BrowserManager.instance;
     }
 
-    // Close the browser
-    async close(): Promise<void> {
-        if (this.browser) {
-            await this.browser.close();
-        }
+    private async init() {
+        // Launch the browser
+        this.browser = await chromium.launch({ headless: false });
+
+        // Create a new browser context
+        this.context = await this.browser.newContext();
+
+        // Create a new page
+        this.page = await this.context.newPage();
     }
 
-    // Get the underlying Playwright browser instance
-    getBrowser(): Browser {
-        if (!this.browser) {
-            throw new Error('Browser is not launched.');
-        }
-        return this.browser;
+    public getPage(): Page {
+        return this.page;
+    }
+
+    public async close() {
+        await this.browser.close();
     }
 }
+
+export { BrowserManager };

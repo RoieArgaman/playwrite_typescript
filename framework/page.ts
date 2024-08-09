@@ -1,26 +1,11 @@
 import { Page } from 'playwright';
-import {ElementHandle} from "@playwright/test";
+import {GlobalPaths} from "./global_variables";
 
-export class BasePage {
-    private page: Page;
-
+class BasePage {
+    protected page: Page;
+    private get url(): string { return ''; }
     constructor(page: Page) {
         this.page = page;
-    }
-
-     // Method to select a single element
-    async querySelector(selector: string): Promise<ElementHandle | null> {
-        return await this.page.$(selector);
-    }
-
-    // Method to select multiple elements
-    async QuerySelectorAll(selector: string): Promise<ElementHandle[]> {
-        return await this.page.$$(selector);
-    }
-
-    // Example method to navigate to a URL
-    async open(url: string): Promise<void> {
-        await this.page.goto(url);
     }
 
     // Example method to click an element by selector
@@ -38,4 +23,16 @@ export class BasePage {
         return await this.page.textContent(selector) || '';
     }
 
+    // Example method to navigate to a URL
+    async open(url: string): Promise<void> {
+        let fullPath = GlobalPaths.BASE_URL + url
+        await this.page.goto(fullPath);
+    }
+
+    public async is_in_page(): Promise<boolean> {
+        const currentUrl = this.page.url();
+        return currentUrl === GlobalPaths.BASE_URL + this.url;
+    }
 }
+
+export {BasePage}
