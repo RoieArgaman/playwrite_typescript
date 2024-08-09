@@ -23,7 +23,6 @@ class WizardFlows {
         this.registerCodeVerificationPage = new RegisterCodeVerificationPage(page);
     }
 }
-
 class WebFlows {
     public loginFlows: LoginFlows;
     public wizardFlows: WizardFlows;
