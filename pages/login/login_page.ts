@@ -1,20 +1,14 @@
 import { BasePage } from '../../framework/page';
+import {TextInput} from "../../components/text_input";
 
 class LoginPage extends BasePage {
-    private get emailInput(): string { return '[data-testid="input-email"]'; }
-    private get passwordInput(): string { return '[data-testid="input-password"]'; }
+    private get emailInput(): TextInput { return new TextInput(this.page, '[data-testid="input-email"]'); }
+    private get passwordInput(): TextInput { return new TextInput(this.page, '[data-testid="input-password"]'); }
     private get loginButton(): string { return '[data-testid="button-auth.signIn.buttonLabel"]'; }
     private get forgotYourPasswordButton(): string { return '[data-testid="link-auth.login.forgotPassword"]'; }
     private get getStartedButton(): string { return '[data-testid="link-Get started"]'; }
     public get url(): string { return '/login'; }
 
-    async enterEmail(username: string): Promise<void> {
-        await this.fill(this.emailInput, username);
-    }
-
-    async enterPassword(password: string): Promise<void> {
-        await this.fill(this.passwordInput, password);
-    }
 
     async clickLoginButton(): Promise<void> {
         await this.click(this.loginButton);
@@ -29,8 +23,8 @@ class LoginPage extends BasePage {
     }
 
     async login(username: string, password: string): Promise<void> {
-        await this.enterEmail(username);
-        await this.enterPassword(password);
+        await this.emailInput.enter_text(username);
+        await this.passwordInput.enter_text(password);
         await this.clickLoginButton();
     }
 

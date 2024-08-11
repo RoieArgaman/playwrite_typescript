@@ -1,27 +1,14 @@
-import { testSetup , expect} from './conftest';
+import { test , expect} from './conftest';
+import { GlobalVariables } from "../framework/global_variables";
 
-testSetup.describe('Login page', () => {
-  testSetup('should open login page and verify it opened', async ({webFlows}) => {
+test.describe('Login page', () => {
+  test('should create vendor successfully - case 1', async ({webFlows}) => {
     await webFlows.loginFlows.loginPage.open()
     expect(await webFlows.loginFlows.loginPage.is_in_page()).toBeTruthy()
+    await webFlows.loginFlows.loginPage.login(GlobalVariables.USERNAME, GlobalVariables.PASSWORD);
+    await webFlows.dashboardFlows.sideNav.clickPayTab()
+    await webFlows.dashboardFlows.payPage.clickVendorsTab()
+    let r =15
   });
 
-  testSetup('should open login page and redirect to forgot your password', async ({webFlows}) => {
-    await webFlows.loginFlows.loginPage.open()
-    await webFlows.loginFlows.loginPage.clickForgotYourPasswordButton()
-    expect(await webFlows.loginFlows.forgotYourPasswordPage.is_in_page()).toBeTruthy()
-  });
-
-  testSetup('should open forgot your password page and verify it opened', async ({webFlows}) => {
-    await webFlows.loginFlows.forgotYourPasswordPage.open()
-    expect(await webFlows.loginFlows.forgotYourPasswordPage.is_in_page()).toBeTruthy()
-  });
-
-  testSetup('should register flow', async ({webFlows}) => {
-    await webFlows.loginFlows.loginPage.open()
-    await webFlows.loginFlows.loginPage.clickGetStartedButton()
-    expect(await webFlows.wizardFlows.registerPage.is_in_page()).toBeTruthy()
-    await webFlows.wizardFlows.registerPage.clickEmailAndPasswordButton()
-    expect(await webFlows.wizardFlows.registerPage.is_in_page()).toBeTruthy()
-  });
 });

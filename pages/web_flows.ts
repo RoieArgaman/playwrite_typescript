@@ -4,6 +4,8 @@ import {ForgotYourPasswordPage} from "./login/forgot_your_password_page";
 import {RegisterCodeVerificationPage} from "./wizard/register_code_verification_page";
 import { BrowserManager } from '../framework/browser';
 import {RegisterPage} from "./wizard/register_page";
+import {SideNav} from "./dashboard/side_nav";
+import {PayPage} from "./dashboard/pay_page";
 
 class LoginFlows {
     public loginPage: LoginPage;
@@ -23,15 +25,26 @@ class WizardFlows {
         this.registerCodeVerificationPage = new RegisterCodeVerificationPage(page);
     }
 }
+class DashboardFlows {
+    public sideNav: SideNav;
+    public payPage: PayPage
+
+    constructor(page: Page) {
+        this.sideNav = new SideNav(page);
+        this.payPage = new PayPage(page);
+    }
+}
 class WebFlows {
     public loginFlows: LoginFlows;
     public wizardFlows: WizardFlows;
+    public dashboardFlows: DashboardFlows;
     private context: BrowserContext;
     private page: Page;
 
     private constructor(page: Page, context: BrowserContext) {
         this.loginFlows = new LoginFlows(page);
         this.wizardFlows = new WizardFlows(page);
+        this.dashboardFlows = new DashboardFlows(page);
         this.page = page;
         this.context = context;
     }

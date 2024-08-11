@@ -1,7 +1,7 @@
 import { WebFlows } from '../pages/web_flows';
 import { test as base , expect as expectBase} from '@playwright/test';
 
-const testSetup = base.extend<{
+const test = base.extend<{
     webFlows: WebFlows;
 }>({
     webFlows: async ({}, use) => {
@@ -16,7 +16,7 @@ const testSetup = base.extend<{
     },
 });
 
-export { testSetup };
+export { test };
 
 const expect = expectBase.extend({})
 export {expect}
