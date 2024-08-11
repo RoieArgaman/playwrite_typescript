@@ -9,7 +9,7 @@ export abstract class BaseComponent {
         this.locator = page.locator(selector);
     }
 
-    async isVisible(): Promise<boolean> {
+    async isInComponent(): Promise<boolean> {
         return this.locator.isVisible();
     }
 
@@ -19,6 +19,10 @@ export abstract class BaseComponent {
 
     async waitForInvisible(timeout: number = 3000): Promise<void> {
         await this.locator.waitFor({state: 'hidden', timeout});
+    }
+
+    async click(selector: string): Promise<void> {
+        await this.locator.locator(selector).click()
     }
 
 }

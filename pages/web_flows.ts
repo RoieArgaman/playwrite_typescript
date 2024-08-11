@@ -30,7 +30,7 @@ class DashboardFlows {
     public payPage: PayPage
 
     constructor(page: Page) {
-        this.sideNav = new SideNav(page);
+        this.sideNav = new SideNav(page, '[data-testid="left-nav-container"]');
         this.payPage = new PayPage(page);
     }
 }

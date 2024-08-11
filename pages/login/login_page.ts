@@ -2,8 +2,8 @@ import { BasePage } from '../../framework/page';
 import {TextInput} from "../../components/text_input";
 
 class LoginPage extends BasePage {
-    private get emailInput(): TextInput { return new TextInput(this.page, '[data-testid="input-email"]'); }
-    private get passwordInput(): TextInput { return new TextInput(this.page, '[data-testid="input-password"]'); }
+    public get emailInput(): TextInput { return new TextInput(this.page, '[data-testid="input-email"]'); }
+    public get passwordInput(): TextInput { return new TextInput(this.page, '[data-testid="input-password"]'); }
     private get loginButton(): string { return '[data-testid="button-auth.signIn.buttonLabel"]'; }
     private get forgotYourPasswordButton(): string { return '[data-testid="link-auth.login.forgotPassword"]'; }
     private get getStartedButton(): string { return '[data-testid="link-Get started"]'; }

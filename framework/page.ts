@@ -25,9 +25,13 @@ class BasePage {
         await this.page.goto(fullPath);
     }
 
-    public async is_in_page(): Promise<boolean> {
+    async isInPage(): Promise<boolean> {
         const currentUrl = this.page.url();
         return currentUrl === GlobalPaths.BASE_URL + this.url;
+    }
+
+    async sleep(ms: number): Promise<void> {
+        return new Promise(resolve => setTimeout(resolve, ms))
     }
 }
 
