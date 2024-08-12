@@ -1,10 +1,10 @@
-import { test , expect} from './conftest';
-import { GlobalVariables } from "../framework/globalVariables";
-import { AddVendorFactory} from "../webForms/vendor";
-import {generateData} from "../framework/dataGenerator";
+import { test , expect} from '../conftest';
+import { GlobalVariables } from "../../framework/globalVariables";
+import { AddVendorFactory} from "../../webForms/vendor";
+import {generateData} from "../../framework/dataGenerator";
 
 
-test.describe('Login page', () => {
+test.describe('Test add Vendor', () => {
   test('should create vendor successfully - case 1', async ({webFlows}) => {
     await webFlows.loginFlows.loginPage.open()
     await webFlows.loginFlows.loginPage.login(GlobalVariables.USERNAME, GlobalVariables.PASSWORD);

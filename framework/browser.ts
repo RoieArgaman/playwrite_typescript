@@ -21,9 +21,6 @@ class BrowserManager {
 
     public async createContextAndPage(): Promise<{ context: BrowserContext; page: Page }> {
         const context = await ContextFactory.createContext(this.browser);
-        // const context = await this.browser.newContext({
-        //     userAgent: 'qa-automation-homework'
-        // });
         const page = await context.newPage();
         return {context, page};
     }
