@@ -20,9 +20,10 @@ class BrowserManager {
     }
 
     public async createContextAndPage(): Promise<{ context: BrowserContext; page: Page }> {
-        const context = await this.browser.newContext({
-            userAgent: 'qa-automation-homework'
-        });
+        const context = await ContextFactory.createContext(this.browser);
+        // const context = await this.browser.newContext({
+        //     userAgent: 'qa-automation-homework'
+        // });
         const page = await context.newPage();
         return {context, page};
     }
@@ -33,3 +34,26 @@ class BrowserManager {
 }
 
 export {BrowserManager};
+
+
+interface ContextOptions {
+  viewport?: { width: number; height: number };
+  userAgent?: string;
+}
+
+export class ContextFactory {
+  private static defaultOptions: ContextOptions = {
+    viewport: { width: 1280, height: 720 },
+    userAgent: 'qa-automation-homework',
+
+  };
+
+  static async createContext(browser: Browser, options: ContextOptions = {}): Promise<BrowserContext> {
+    const mergedOptions = { ...this.defaultOptions, ...options };
+
+    return await browser.newContext({
+      viewport: mergedOptions.viewport,
+      userAgent: mergedOptions.userAgent
+    });
+  }
+}

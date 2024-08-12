@@ -1,11 +1,10 @@
 import { Page , BrowserContext} from 'playwright';
 import { LoginPage } from './login/login_page';
 import {ForgotYourPasswordPage} from "./login/forgot_your_password_page";
-import {RegisterCodeVerificationPage} from "./wizard/register_code_verification_page";
 import { BrowserManager } from '../framework/browser';
-import {RegisterPage} from "./wizard/register_page";
-import {SideNav} from "./dashboard/side_nav";
-import {PayPage} from "./dashboard/pay_page";
+import {RegisterPage} from "./wizard/registerPage";
+import {SideNav} from "./dashboard/sideNav";
+import {PayPage} from "./dashboard/payPage";
 
 class LoginFlows {
     public loginPage: LoginPage;
@@ -18,13 +17,12 @@ class LoginFlows {
 }
 class WizardFlows {
     public registerPage: RegisterPage;
-    public registerCodeVerificationPage: RegisterCodeVerificationPage;
 
     constructor(page: Page) {
         this.registerPage = new RegisterPage(page);
-        this.registerCodeVerificationPage = new RegisterCodeVerificationPage(page);
     }
 }
+
 class DashboardFlows {
     public sideNav: SideNav;
     public payPage: PayPage
@@ -34,6 +32,7 @@ class DashboardFlows {
         this.payPage = new PayPage(page);
     }
 }
+
 class WebFlows {
     public loginFlows: LoginFlows;
     public wizardFlows: WizardFlows;

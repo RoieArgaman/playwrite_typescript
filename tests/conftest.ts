@@ -1,4 +1,4 @@
-import { WebFlows } from '../pages/web_flows';
+import { WebFlows } from '../pages/webFlows';
 import { test as base , expect as expectBase} from '@playwright/test';
 
 const test = base.extend<{

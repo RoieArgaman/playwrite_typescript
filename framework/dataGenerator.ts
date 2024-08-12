@@ -13,7 +13,20 @@ export function email(): string {
 }
 
 export function phone(): string {
-  return faker.phone.number();
+  return faker.phone.number('(###) ###-####');
+}
+
+export function invalidEmail(): string {
+  const createInvalidEmails = [
+    () => faker.internet.userName() + '@.',
+    () => '@' + faker.internet.domainName(),
+    () => faker.internet.userName() + '@' + faker.internet.domainName() + '..',
+    () => faker.internet.userName() + '@example,com',
+    () => faker.internet.userName() + 'example.com'
+  ];
+
+  const randomIndex = Math.floor(Math.random() * createInvalidEmails.length);
+  return createInvalidEmails[randomIndex]();
 }
 
 export function generateData() {
@@ -21,6 +34,7 @@ export function generateData() {
     BUSINESS_NAME: businessName(),
     FULL_NAME: fullName(),
     EMAIL: email(),
+    INVALID_EMAIL: invalidEmail(),
     PHONE: phone()
   };
 }

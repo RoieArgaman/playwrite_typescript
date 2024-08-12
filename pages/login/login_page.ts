@@ -1,5 +1,5 @@
 import { BasePage } from '../../framework/page';
-import {TextInput} from "../../components/text_input";
+import {TextInput} from "../../components/textInput";
 
 class LoginPage extends BasePage {
     public get emailInput(): TextInput { return new TextInput(this.page, '[data-testid="input-email"]'); }
