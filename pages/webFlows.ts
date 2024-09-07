@@ -48,8 +48,8 @@ class WebFlows {
         this.context = context;
     }
 
-    public static async create(): Promise<WebFlows> {
-        const browserManager = await BrowserManager.getInstance();
+    public static async create(projectName:string): Promise<WebFlows> {
+        const browserManager = await BrowserManager.getInstance(projectName);
         const { context, page } = await browserManager.createContextAndPage();
         return new WebFlows(page, context);
     }

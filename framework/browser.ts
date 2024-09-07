@@ -1,28 +1,42 @@
-import {chromium, Browser, BrowserContext, Page} from 'playwright';
+import { chromium, firefox, webkit, Browser, BrowserContext, Page } from 'playwright';
 
 class BrowserManager {
     private static instance: BrowserManager;
     private browser: Browser;
+    private readonly browserType: string; // Browser type can be passed dynamically
 
-    private constructor() {
+    private constructor(browserType: string) {
+        this.browserType = browserType; // Store the browser type
     }
 
-    public static async getInstance(): Promise<BrowserManager> {
+    public static async getInstance(browserType: string): Promise<BrowserManager> {
         if (!BrowserManager.instance) {
-            BrowserManager.instance = new BrowserManager();
+            BrowserManager.instance = new BrowserManager(browserType);
             await BrowserManager.instance.init();
         }
         return BrowserManager.instance;
     }
 
     private async init() {
-        this.browser = await chromium.launch({headless: false});
+        switch (this.browserType) {
+            case 'chromium':
+                this.browser = await chromium.launch({ headless: false });
+                break;
+            case 'firefox':
+                this.browser = await firefox.launch({ headless: false });
+                break;
+            case 'webkit':
+                this.browser = await webkit.launch({ headless: false });
+                break;
+            default:
+                this.browser = await chromium.launch({ headless: false });
+        }
     }
 
     public async createContextAndPage(): Promise<{ context: BrowserContext; page: Page }> {
         const context = await ContextFactory.createContext(this.browser);
         const page = await context.newPage();
-        return {context, page};
+        return { context, page };
     }
 
     public async close() {
@@ -30,7 +44,7 @@ class BrowserManager {
     }
 }
 
-export {BrowserManager};
+export { BrowserManager };
 
 
 interface ContextOptions {
@@ -42,7 +56,6 @@ export class ContextFactory {
   private static defaultOptions: ContextOptions = {
     viewport: { width: 1280, height: 720 },
     userAgent: 'qa-automation-homework',
-
   };
 
   static async createContext(browser: Browser, options: ContextOptions = {}): Promise<BrowserContext> {
