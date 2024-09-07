@@ -37,7 +37,7 @@ class WebFlows {
     public loginFlows: LoginFlows;
     public wizardFlows: WizardFlows;
     public dashboardFlows: DashboardFlows;
-    private context: BrowserContext;
+    public context: BrowserContext;
     private page: Page;
 
     private constructor(page: Page, context: BrowserContext) {
