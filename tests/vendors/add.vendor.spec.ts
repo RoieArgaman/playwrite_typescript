@@ -5,7 +5,7 @@ import {generateData} from "../../framework/dataGenerator";
 
 
 test.describe('Test add Vendor', () => {
-  test('should create vendor successfully - case 1', async ({webFlows}) => {
+  test('should create vendor successfully - case 1', {tag: ['@asd']} ,async ({webFlows}) => {
     await webFlows.loginFlows.loginPage.open()
     await webFlows.loginFlows.loginPage.login(GlobalVariables.USERNAME, GlobalVariables.PASSWORD);
     await webFlows.dashboardFlows.payPage.vendors.addVendorsButton.click()
