@@ -12,6 +12,8 @@
     "@types/node": "^22.1.0"
   },
   "dependencies": {
-    "@faker-js/faker": "^8.4.1"
+    "@faker-js/faker": "^8.4.1",
+    "@types/axios": "^0.9.36",
+    "axios": "^1.7.7"
   }
 }
