@@ -19,8 +19,7 @@ test.describe('Test add Vendor', () => {
 
     await webFlows.dashboardFlows.payPage.vendors.allVendorsTable.clickOnRow()
     let drawerVendorData = await webFlows.dashboardFlows.payPage.vendors.vendorDetailsDrawer.getFullVendorDetails()
-    expect(drawerVendorData).toEqual(10)
-    //expect(drawerVendorData).toEqual(vendorData)
+    expect(drawerVendorData).toEqual(vendorData)
   });
 
   test('should verify vendor name already exist - case 2', async ({webFlows}) => {
