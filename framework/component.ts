@@ -1,12 +1,22 @@
-import {Page, Locator} from '@playwright/test';
+import {
+    Page,
+    Locator,
+    test,
+    TestType,
+    PlaywrightTestArgs,
+    PlaywrightTestOptions,
+    PlaywrightWorkerArgs, PlaywrightWorkerOptions
+} from '@playwright/test';
 
 export abstract class BaseComponent {
     protected page: Page;
     protected locator: Locator;
+    protected test: TestType<PlaywrightTestArgs & PlaywrightTestOptions, PlaywrightWorkerArgs & PlaywrightWorkerOptions>;
 
     protected constructor(page: Page, selector: string) {
         this.page = page;
         this.locator = page.locator(selector);
+        this.test = test;
     }
 
     async isInComponent(): Promise<boolean> {

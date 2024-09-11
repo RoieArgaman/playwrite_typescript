@@ -8,8 +8,10 @@ export class TextInput extends BaseComponent {
     }
 
     async enter_text(text: string): Promise<void> {
-        await this.clear()
-        await this.locator.fill(text);
+        await this.test.step(`Enter text ${text}`, async () => {
+            await this.clear()
+            await this.locator.fill(text);
+        })
     }
 
     async clear(): Promise<void> {

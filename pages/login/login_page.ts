@@ -29,7 +29,10 @@ class LoginPage extends BasePage {
     }
 
     async open(): Promise<void> {
-        await super.open(this.url); // Call the base class open method
+        await this.test.step('login', async (): Promise<void> => {
+            await super.open(this.url); // Call the base class open method
+        })
+
     }
 }
  export {LoginPage}

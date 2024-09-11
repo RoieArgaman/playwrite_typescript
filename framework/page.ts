@@ -1,13 +1,23 @@
 import { Page } from 'playwright';
 import {GlobalPaths} from "./globalVariables";
+import {
+    PlaywrightTestArgs,
+    PlaywrightTestOptions,
+    PlaywrightWorkerArgs,
+    PlaywrightWorkerOptions,
+    test,
+    TestType
+} from "@playwright/test"
 
 class BasePage {
     protected page: Page;
+    protected test: TestType<PlaywrightTestArgs & PlaywrightTestOptions, PlaywrightWorkerArgs & PlaywrightWorkerOptions>;
     public get url(): string { return '/login'; }
     public get keyboardActions(): KeyboardActions{ return new KeyboardActions(this.page) }
     
     constructor(page: Page) {
         this.page = page;
+        this.test = test
     }
 
     async click(selector: string): Promise<void> {
